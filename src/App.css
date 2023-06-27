@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+.navbar{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.navform{
+  float: right;
+}
+.container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formField{
+  width: 500px;
+  min-width: 500px;
+  text-align: left;
+  padding: 3px;
+  border-radius: 6px;
+   padding-inline-start: 15px;
+}
+
+/* .inputField{
+  padding: 5px;
+  margin: 5px;
+} */
+.form-control{
+ 
+}
+
+.Form{
+   background-color: rgb(243, 239, 234);
+   display: flex;
+   justify-content: center;
+   width: 600px;
+   border-radius: 5px;
+}
+/* .signupForm {
+ 
+  /* width: 500px; 
+  
+} */
