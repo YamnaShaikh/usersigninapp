@@ -1,8 +1,7 @@
 import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_VERIFICATION_FAIL, USER_VERIFICATION_REQUEST, USER_VERIFICATION_SUCCESS } from "./userConstants";
 
 const initialState = {
-    user: [],
-    userData: []
+    user: {}
 };
 
 
@@ -23,7 +22,7 @@ export const userRegisterReducer = (state = initialState, action) => {
         case USER_VERIFICATION_SUCCESS:
             return {
                 loading: false,
-                userData: action.payload
+                user: action.payload
             }
         case USER_VERIFICATION_FAIL:
             return { loading: false, error: action.payload };

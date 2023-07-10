@@ -4,11 +4,12 @@ import * as Yup from "yup";
 import '../App.css'
 import { useDispatch } from "react-redux";
 import { login, register } from "../Redux/userAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const SignIn = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // const [userValue, setUserValue] = useState([]);
     const initialValues = {
@@ -39,6 +40,7 @@ const SignIn = () => {
 
         }
         dispatch(login(user))
+        navigate('/dashboard');
         console.log(user);
         // setUserValue([...values]);
         resetForm();

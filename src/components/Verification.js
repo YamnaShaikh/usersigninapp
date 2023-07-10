@@ -4,44 +4,33 @@ import * as Yup from "yup";
 import '../App.css'
 import { useDispatch } from "react-redux";
 import { Verification, login, register } from "../Redux/userAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const VerificationPin = () => {
-    debugger;
+    // debugger;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    let phone = JSON.parse(localStorage.getItem("usersList"));
 
     const initialValues = {
-        // id: Date.now(),
-        phone: phone[0].user.phone,
         phone_pin: ""
     };
 
 
 
     const validationSchema = Yup.object().shape({
-        phone: Yup.string().required("Phone Number is required"),
+        // phone: Yup.string().required("Phone Number is required"),
         phone_pin: Yup.string().required("phone pin is required"),
     });
-    debugger;
-    const handleSubmit = (values, { resetForm }) => {
+    const handleSubmit = (value, { resetForm }) => {
+        debugger;
+
         alert('hello')
         console.log("here");
-        console.log(values);
-
-        const user = {
-            user: values,
-
-            user_session: {
-                device_type: "ios/android",
-                device_token: "xxx"
-            }
-
-        }
-        dispatch(Verification(user))
-        console.log(user);
+        dispatch(Verification(value))
+        navigate('/dashboard');
+        console.log(value);
         // setUserValue([...values]);
         resetForm();
     };
@@ -66,7 +55,7 @@ const VerificationPin = () => {
                                     {/* <label htmlFor="phone" className="formLabel">
                                     Phone
                                 </label> */}
-                                    <Field
+                                    {/* <Field
                                         type="text"
                                         id="phone"
                                         name="phone"
@@ -77,7 +66,7 @@ const VerificationPin = () => {
                                         name="phone"
                                         component="span"
                                         className="error errMsg"
-                                    />
+                                    /> */}
                                 </div>
                                 <span></span>
 
