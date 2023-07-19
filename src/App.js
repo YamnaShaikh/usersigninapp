@@ -1,49 +1,90 @@
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import "./App.css";
-import { useSelector } from "react-redux";
-import SignUp from "./components/SignUp";
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-// import Test from "./components/Test";
-import VerificationPin from "./components/Verification";
-import Dashboard from "./components/Dashboard";
+import Dashboard from './components/Dashboard';
+import VerificationPin from './components/Verification';
 import SignIn from "./components/SignIn";
-
+import SignUp from './components/SignUp';
+import routes from './Routes';
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   const token = localStorage.getItem("token") || null;
   const navigate = useNavigate();
 
-  debugger;
   useEffect(() => {
-    if (token != null || token != undefined) {
+    if (token != null) {
       navigate("/dashboard");
     }
-  }, [navigate, token]);
+  }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<SignUp />} />
+    <div className="App">
+      <Routes>
+        {/* <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              isVerified ? (
+                <Dashboard />
+              ) : (
+                <Navigate to="/verifyphone" replace />
+              )
+            ) : (
+              <SignUp setIsAuthenticated={setIsAuthenticated} />
+            )
+          }
+        /> */}
+        {/* <Route
+          path="/verifyphone"
+          element={
+            isAuthenticated ? (
+              isVerified ? (
+                <Dashboard />
+              ) : (
+                <VerificationPin setIsVerified={setIsVerified} />
+              )
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        /> */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/signin" element={<SignIn />} /> */}
 
-      <Route path="/verifyphone" element={<VerificationPin />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      {/* {!token && <Route path="/login" element={<Login />} />} */}
-      <Route path="/signin" element={<SignIn />} />
-
-      {/* <Route path="/test" element={<Test />} /> */}
-    </Routes>
+        {/* Create dynamic routes */}
+        {routes.map((route) => (
+          <Route
+            key={route.key}
+            path={route.route}
+            element={
+              //   isAuthenticated ? (
+              //   isVerified ? (
+              //     <Dashboard />
+              //   ) : (
+              //     <VerificationPin setIsVerified={setIsVerified} />
+              //   )
+              // ) : (
+              //   <Navigate to="/" replace />
+              // ) &&
+              route.component}
+          />
+        ))}
+      </Routes>
+    </div>
   );
 }
 
-function RouterWrapper() {
+function RouteWrapper() {
   return (
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  );
+  )
 }
 
-export default RouterWrapper;
+export default RouteWrapper;
 
 
 

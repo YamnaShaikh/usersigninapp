@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import '../App.css'
-import { useDispatch } from "react-redux";
-import { Verification, login, register } from "../Redux/userAction";
+import { useDispatch, useSelector } from "react-redux";
+import { Verification } from "../Redux/userAction";
 import { Link, useNavigate } from "react-router-dom";
 
 
 const VerificationPin = () => {
+    // debugger;
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isVerified, setIsVerified] = useState(false);
     // debugger;
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,14 +29,22 @@ const VerificationPin = () => {
     const handleSubmit = (value, { resetForm }) => {
         debugger;
 
-        alert('hello')
+        // alert('hello')
         console.log("here");
-        dispatch(Verification(value))
-        navigate('/dashboard');
-        console.log(value);
-        // setUserValue([...values]);
+        dispatch(Verification(value, navigate, true))
+        // navigate('/dashboard');
+        setIsVerified(true);
         resetForm();
     };
+    // const isAuthenticated = useSelector((state) => state.user);
+
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         navigate("/verifyphone");
+    //     } else {
+    //         navigate("/")
+    //     }
+    // }, []);
 
     return (
         <div>

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import '../App.css'
 import { useDispatch } from "react-redux";
-import { login, register } from "../Redux/userAction";
-import { Link, useNavigate } from "react-router-dom";
+import { login } from "../Redux/userAction";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import Animation from "./Animation";
 
 
 const SignIn = () => {
@@ -26,7 +28,7 @@ const SignIn = () => {
     });
 
     const handleSubmit = (values, { resetForm }) => {
-        alert('hello')
+        // alert('hello')
         console.log("here");
         console.log(values);
 
@@ -39,21 +41,30 @@ const SignIn = () => {
             }
 
         }
-        dispatch(login(user))
-        navigate('/dashboard');
+        dispatch(login(user, navigate))
+        // navigate('/dashboard');
         console.log(user);
-        // setUserValue([...values]);
         resetForm();
     };
 
+    // const token = localStorage.getItem('token')
+
+    const handleClick = () => {
+        debugger;
+
+        navigate("/");
+
+
+    }
     return (
         <div>
             <div className="container ">
+                <Animation />
                 <br />
                 <div className="Form">
 
                     <div className="signupForm">
-                        <h1>Sign In</h1>
+                        <h1 style={{ color: "white", fontFamily: "cursive" }}>Sign In</h1>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
@@ -127,7 +138,7 @@ const SignIn = () => {
                                 <span></span>
                                 <br />
 
-                                <button className="btn btn-lg btn-success " type="submit">
+                                <button className="btn btn-lg btn-success signin_button" type="submit">
                                     Sign In
                                 </button>
 
@@ -135,7 +146,7 @@ const SignIn = () => {
                             </Form>
                         </Formik>
                         <br />
-                        <h5><Link to={'/'}>Create an Account</Link></h5>
+                        <h5><Button className="signup_button" onClick={handleClick}>Create an Account</Button></h5>
                     </div>
                 </div>
             </div>

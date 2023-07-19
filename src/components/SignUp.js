@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import '../App.css'
 import { useDispatch } from "react-redux";
-import { register } from "../Redux/userAction";
+import { register, setUserAuthenticated } from "../Redux/userAction";
 import { Link, useNavigate } from "react-router-dom";
+import Animation from "./Animation";
 
 
 const SignUp = () => {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // const [isVerified, setIsVerified] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -32,26 +36,30 @@ const SignUp = () => {
     });
 
     const handleSubmit = (values, { resetForm }) => {
+        debugger;
         console.log("here");
         console.log(values);
         const user = {
             user: values
         }
-        dispatch(register(user))
+        setIsAuthenticated(true);
+        alert(isAuthenticated)
+        console.log(isAuthenticated);
+        dispatch(register(user, navigate, true));
         console.log(user);
+        // dispatch(setUserAuthenticated(isAuthenticated));
         // setUserValue([...values]);
-        navigate('/verifyphone');
-
         resetForm();
     };
 
     return (
         <div>
             <div className="container ">
+                <Animation />
                 <br />
                 <div className="Form">
                     <div className="signupForm">
-                        <h1>Sign Up</h1>
+                        <h1 style={{ color: "white", fontFamily: "cursive" }}>Sign Up</h1>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
@@ -184,14 +192,14 @@ const SignUp = () => {
 
                                 <br />
 
-                                <button className="btn btn-lg btn-success " type="submit">
+                                <button className="btn btn-lg btn-success signup_button " type="submit">
                                     Sign Up
                                 </button>
 
                             </Form>
                         </Formik>
                         <br />
-                        <h5>Already have an account? <Link to={'/signin'}>Click here!</Link></h5>
+                        <h5 style={{ color: "white" }}>Already have an account? <Link to={'/signin'}>Click here!</Link></h5>
                     </div>
                 </div>
 
