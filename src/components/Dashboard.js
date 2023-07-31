@@ -21,10 +21,10 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import PersonIcon from '@mui/icons-material/Person';
+// import PersonIcon from '@mui/icons-material/Person';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+// import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
 
@@ -104,7 +104,7 @@ const Dashboard = () => {
         } else {
             navigate("/")
         }
-    }, []);
+    }, [navigate, token]);
 
     return (
         <div>
@@ -140,7 +140,7 @@ const Dashboard = () => {
                     open={open}
                 >
                     <DrawerHeader>
-                        <h3></h3>
+                        {/* <h3></h3> */}
                         <IconButton onClick={handleDrawerClose}>
                             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                         </IconButton>
